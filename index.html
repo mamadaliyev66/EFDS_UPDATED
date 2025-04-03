@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Detection System | Early Warning System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF4D4D',
+                        secondary: '#FFA726',
+                        dark: '#1E1E2C',
+                        light: '#F5F5F7',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F7;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #FF4D4D 0%, #FFA726 100%);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .nav-link:hover {
+            color: #FF4D4D;
+        }
+        
+        .mobile-menu {
+            transition: all 0.3s ease;
+        }
+        #video-modal {
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body class="text-dark">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center">
+                        <i class="fas fa-fire text-primary text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">Early Fire Detection System</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="nav-link text-gray-600 hover:text-primary transition">Features</a>
+                    <a href="#services" class="nav-link text-gray-600 hover:text-primary transition">Services</a>
+                    <a href="#how-it-works" class="nav-link text-gray-600 hover:text-primary transition">How It Works</a>
+                    <a href="research_paper.html" class="nav-link text-gray-600 hover:text-primary transition">Research Papers</a>
+                    <a href="#about" class="nav-link text-gray-600 hover:text-primary transition">About</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" class="text-gray-600 hover:text-primary">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu hidden md:hidden bg-white shadow-lg">
+            <div class="px-4 py-2 space-y-2">
+                <a href="#features" class="block px-3 py-2 rounded hover:bg-gray-100">Features</a>
+                <a href="#services" class="block px-3 py-2 rounded hover:bg-gray-100">Services</a>
+                <a href="#how-it-works" class="block px-3 py-2 rounded hover:bg-gray-100">How It Works</a>
+                <a href="research_paper.html" class="nav-link text-gray-600 hover:text-primary transition">Research Papers</a>
+                <a href="#about" class="block px-3 py-2 rounded hover:bg-gray-100">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white pt-24 pb-20 md:pt-44 md:pb-44">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">Early Fire Detection System</h1>
+                    <p class="text-lg mb-8 opacity-90">A cutting-edge solution that detects fire outbreaks in their earliest stages using advanced computer vision technology.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button id="watch-video-btn" class="border-2 border-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition text-center">Watch a Video</button>
+                    </div>
+                </div>
+                <div class="md:w-2xl flex justify-center">
+                    <img src="./assets/images/lands.jpg" alt="Fire Detection System" class="rounded-lg shadow-2xl w-full max-w-xl">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Video Modal -->
+    <div id="video-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-75 p-4">
+        <div class="relative w-full max-w-4xl">
+            <button id="close-modal" class="absolute -top-10 right-0 text-white hover:text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <div class="relative" style="padding-bottom: 56.25%;">
+                <iframe id="youtube-player" class="absolute top-0 left-0 w-full h-full" 
+                        src="https://www.youtube.com/embed/6SYV7NqlCTI?autoplay=1&mute=1"
+                        frameborder="0" allowfullscreen
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-6">
+                    <h3 class="text-3xl font-bold text-primary">-</h3>
+                    <p class="text-gray-600">Detection Accuracy</p>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-3xl font-bold text-primary">-</h3>
+                    <p class="text-gray-600">Early Detection</p>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-3xl font-bold text-primary">24/7</h3>
+                    <p class="text-gray-600">Monitoring</p>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-3xl font-bold text-primary">-</h3>
+                    <p class="text-gray-600">Tests Conducted</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Key Features</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Advanced capabilities that set our system apart</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-md transition card-hover">
+                    <div class="w-14 h-14 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-bolt text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Real-time Detection</h3>
+                    <p class="text-gray-600">Continuously monitors the environment for early signs of fire using computer vision algorithms.</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-md transition card-hover">
+                    <div class="w-14 h-14 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-bell text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Instant Alerts</h3>
+                    <p class="text-gray-600">Immediately notifies authorized personnel when potential fire is detected.</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-md transition card-hover">
+                    <div class="w-14 h-14 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-brain text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">AI-Powered</h3>
+                    <p class="text-gray-600">Utilizes deep learning models to distinguish between actual fires and false positives.</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-md transition card-hover">
+                    <div class="w-14 h-14 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-cloud text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Cloud Integration</h3>
+                    <p class="text-gray-600">Stores detection data in the cloud for analysis and historical reference.</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-md transition card-hover">
+                    <div class="w-14 h-14 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-mobile-alt text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Remote Monitoring</h3>
+                    <p class="text-gray-600">Access the system status and alerts from anywhere via web interface.</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-md transition card-hover">
+                    <div class="w-14 h-14 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-shield-alt text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Multi-Camera Support</h3>
+                    <p class="text-gray-600">Can monitor multiple camera feeds simultaneously for comprehensive coverage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Our Services</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Comprehensive solutions for fire detection and prevention</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden transition card-hover">
+                    <div class="p-8">
+                        <div class="w-14 h-14 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fas fa-cogs text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">System Installation</h3>
+                        <p class="text-gray-600 mb-6">Professional installation of our fire detection system tailored to your specific environment and needs.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white border-2 border-primary rounded-xl shadow-lg overflow-hidden transition card-hover relative">
+                    <div class="p-8">
+                        <div class="w-14 h-14 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fas fa-graduation-cap text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Training & Support</h3>
+                        <p class="text-gray-600 mb-6">Comprehensive training for your staff and ongoing technical support to ensure optimal system performance.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden transition card-hover">
+                    <div class="p-8">
+                        <div class="w-14 h-14 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fas fa-chart-line text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Monitoring Service</h3>
+                        <p class="text-gray-600 mb-6">24/7 professional monitoring of your fire detection system with immediate emergency response coordination.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">How It Works</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">The technology behind our early fire detection system</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center mb-12">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-10">
+                    <h3 class="text-2xl font-semibold mb-4">1. Video Feed Analysis</h3>
+                    <p class="text-gray-600 mb-6">The system continuously analyzes video feeds from connected cameras, looking for visual signatures of fire.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>Processes frames in real-time</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>Detects flame patterns and smoke</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>Works with most IP cameras</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="./assets/images/th.jpeg" alt="Video Feed Analysis" class="rounded-lg shadow-lg w-full">
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center mb-12">
+                <div class="md:w-1/2 order-2 md:order-1">
+                    <img src="./assets/images/forests-12-00217-g007.webp" alt="AI Processing" class="rounded-lg shadow-lg w-full">
+                </div>
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pl-10 order-1 md:order-2">
+                    <h3 class="text-2xl font-semibold mb-4">2. AI Processing</h3>
+                    <p class="text-gray-600 mb-6">Deep learning models evaluate potential fire signatures to confirm threats and reduce false alarms.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>Convolutional Neural Networks for image analysis</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>Trained on thousands of fire/non-fire images</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>Continuous learning improves accuracy</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-10">
+                    <h3 class="text-2xl font-semibold mb-4">3. Alert System</h3>
+                    <p class="text-gray-600 mb-6">When fire is confirmed, the system triggers multiple alert mechanisms to ensure rapid response.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>Visual and audible alarms on premises</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>Push notifications to mobile devices</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-primary mt-1 mr-2"></i>
+                            <span>Email alerts with incident details</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="./assets/images/notifications-graphic.png" alt="Alert System" class="rounded-lg shadow-lg max-w-full h-96 w-96">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0 md:pr-10">
+                    <h2 class="text-3xl font-bold mb-6">About This Project</h2>
+                    <p class="text-gray-600 mb-6">The Early Fire Detection System was developed to address the critical need for faster, more reliable fire detection in various environments.</p>
+                    <p class="text-gray-600 mb-6">Traditional smoke detectors can be slow to respond and are prone to false alarms. Our computer vision-based solution identifies visual signatures of fire much earlier in the development cycle, providing valuable time for response and evacuation.</p>
+                    <button id="watch-video-btn-2" class="inline-block bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-opacity-90 transition">Watch Demo Video</button>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="./assets/images/why-fire-detection.jpg" alt="About Fire Detection System" class="rounded-lg shadow-lg w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+   <!-- Contact Section -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-4">Contact Information</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Get in touch with us for more information about our fire detection solutions</p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div class="bg-light p-6 rounded-lg text-center">
+                <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                    <i class="fas fa-envelope text-primary text-xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">Email</h3>
+                <p class="text-gray-600">dilshodbekmx@gmail.com</p>
+            </div>
+            
+            <div class="bg-light p-6 rounded-lg text-center">
+                <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                    <i class="fas fa-phone-alt text-primary text-xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">Phone</h3>
+                <p class="text-gray-600">+998 97 343 54 64</p>
+            </div>
+            
+            <div class="bg-light p-6 rounded-lg text-center">
+                <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                    <i class="fas fa-map-marker-alt text-primary text-xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">Location</h3>
+                <p class="text-gray-600">Tashkent, Uzbekistan</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+<footer class="bg-dark text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="mb-8 md:mb-0">
+                <a href="#" class="flex items-center mb-6">
+                    <i class="fas fa-fire text-primary text-2xl mr-2"></i>
+                    <span class="text-xl font-bold">Early Fire Detection System</span>
+                </a>
+                <p class="text-gray-400">Advanced computer vision technology for early fire detection.</p>
+            </div>
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-6">Navigation</h4>
+                <ul class="space-y-3 md:grid md:grid-cols-2">
+                    <li><a href="#features" class="text-gray-400 hover:text-white transition">Features</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-white transition">Services</a></li>
+                    <li><a href="#how-it-works" class="text-gray-400 hover:text-white transition">How It Works</a></li>
+                    <a href="research_paper.html" class="nav-link text-gray-600 hover:text-primary transition">Research Papers</a>
+                    <li><a href="#about" class="text-gray-400 hover:text-white transition">About</a></li>
+
+                </ul>
+            </div>
+        </div>
+        
+        <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+            <p class="text-gray-400">© 2023 Early Fire Detection System. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add shadow to navbar on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 10) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+
+        // Video modal functionality
+        const videoBtn = document.getElementById('watch-video-btn');
+        const videoBtn2 = document.getElementById('watch-video-btn-2');
+        const videoModal = document.getElementById('video-modal');
+        const closeBtn = document.getElementById('close-modal');
+        
+        function openVideoModal() {
+            videoModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeVideoModal() {
+            videoModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        
+        if (videoBtn) videoBtn.addEventListener('click', openVideoModal);
+        if (videoBtn2) videoBtn2.addEventListener('click', openVideoModal);
+        if (closeBtn) closeBtn.addEventListener('click', closeVideoModal);
+        
+        // Close modal when clicking outside the video
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                closeVideoModal();
+            }
+        });
+        
+        // Contact button handlers
+        const contactBtns = [
+            document.getElementById('contact-btn'),
+            document.getElementById('footer-contact-btn')
+        ];
+        
+        contactBtns.forEach(btn => {
+            if (btn) {
+                btn.addEventListener('click', () => {
+                    alert('Please contact us at info@firedetectionsystem.com for more information.');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
